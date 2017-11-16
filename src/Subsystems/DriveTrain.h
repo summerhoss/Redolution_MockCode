@@ -4,26 +4,18 @@
 #include <Commands/Subsystem.h>
 
 #include <WPILib.h>
-//#include "Commands/Subsystem.h"
-//#include "../Sensors/UltrasonicSensors.h"
-//#include "Subsystems/NewGyro.h"
-//#include "Subsystems/GyroAxis.h"
-//using namespace frc;
+#include "ctrlib/CANTalon.h"
+#include "Commands/Subsystem.h"
+
 class DriveTrain: public Subsystem {
 private:
 
-	TalonSRX* left;
-	TalonSRX* right;
+	CANTalon* left;
+	CANTalon* right;
 	int ticksToDistance;
-	//BuiltInAccelerometer* accel;
-	//bool reverse;
-	//wvrobotics::GyroL3GD20H* gyro;
-	//DigitalGyro* gyro;
-	//UltrasonicSensors* ultrasonicSensors;
 
 public:
-	//wvrobotics::NewGyro* gyro;
-	//wvrobotics::GyroAxis* axis;
+
 	DriveTrain();
 	~DriveTrain();
 
@@ -36,17 +28,6 @@ public:
 	void tankDrive(float moveValueLeft, float moveValueRight);
 
 	double getDistance();
-	double getRate();
-	void resetEncoders();
-	void getAccelerations(double* x, double* y, double* z);
-
-	double getRightEncoderDistance();
-	double getLeftEncoderDistance();
-
-	double getGyroAngle();
-	void resetGyro();
-
-	double readUltra(uint16_t sensorIndex);
 
 	void setSpeedLeft(double speed);
 	void setSpeedRight(double speed);   //if needed

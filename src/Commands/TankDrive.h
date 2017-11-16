@@ -2,7 +2,7 @@
 #define TankDrive_H
 
 #include "CommandBase.h"
-//#include "../Utilities/WVPIDController.h"
+#include "../Utilities/WVPIDController.h"
 #include <WPILib.h>
 //#include ""
 
@@ -17,7 +17,7 @@ public:
 private:
 	double mapToCubic(double a, double b, double signal);
 	bool isReset;
-	//WVPIDController* anglePid;
+	WVPIDController* drivingPid;
 };
 
 #endif

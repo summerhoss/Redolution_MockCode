@@ -3,11 +3,11 @@
 TankDrive::TankDrive() :
 		isReset(true) {
 	Requires(drive);
-	//anglePid = new WVPIDController(.05, 0, 0, 0, false);
+	drivingPid = new WVPIDController(.05, 0, 0, 0, false);
 }
 
 void TankDrive::Initialize() {
-	drive->resetGyro();
+
 }
 
 void TankDrive::Execute() {

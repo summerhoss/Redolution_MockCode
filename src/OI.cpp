@@ -2,6 +2,8 @@
 
 #include <WPILib.h>
 
+using namespace frc;
+
 OI::OI() : leftStick(new Joystick(2)), rightStick(new Joystick(1))  {
 	//check arguments
 }

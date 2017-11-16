@@ -12,10 +12,6 @@
 
 class Robot: public frc::IterativeRobot {
 private:
-	std::unique_ptr<frc::Command> autoCommand;
-	int flag = 0;
-	int startupTime = 5;
-	CommandGroup* autonomousCommand;
 	frc::SendableChooser<frc::Command*> chooser;
 
 public:
@@ -32,14 +28,11 @@ public:
 	 * the robot is disabled.
 	 */
 	void DisabledInit() override {
-		//CommandBase::drive->gyro->periodicProcessing(startupTime);
+
 	}
 
 	void DisabledPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
-		//CommandBase::drive->gyro->periodicProcessing(startupTime);
-		frc::SmartDashboard::PutNumber("Gyro",
-		CommandBase::drive->getGyroAngle());
 	}
 
 	/**
@@ -54,24 +47,10 @@ public:
 	 * to the if-else structure below with additional strings & commands.
 	 */
 	void AutonomousInit() override {
-		/* std::string autoSelected = frc::SmartDashboard::GetString("Auto Selector", "Default");
-		if (autoSelected == "My Auto") {
-			autonomousCommand.reset(new MyAutoCommand());
-		}
-		else {
-			autonomousCommand.reset(new ExampleCommand());
-		} */
 
-		//autonomousCommand.reset(chooser.GetSelected());
-
-		//if (autonomousCommand.get() != nullptr) {
-			//autonomousCommand->Start();
-		//}
 	}
 
 	void AutonomousPeriodic() override {
-		frc::Scheduler::GetInstance()->Run();
-		//CommandBase::drive->gyro->periodicProcessing(startupTime);
 		frc::Scheduler::GetInstance()->Run();
 	}
 
@@ -80,20 +59,12 @@ public:
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != nullptr) {
-			autonomousCommand->Cancel();
 
-		if (autoCommand.get() != nullptr) {
-					autoCommand->Cancel();
-				}
-		}
 	}
 
 	void TeleopPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
-		//CommandBase::drive->gyro->periodicProcessing(startupTime);
-		frc::SmartDashboard::PutNumber("Gyro",
-		CommandBase::drive->getGyroAngle());
+
 	}
 
 	void TestPeriodic() override {

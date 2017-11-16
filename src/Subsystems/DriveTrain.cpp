@@ -1,6 +1,5 @@
 #include "DriveTrain.h"
 #include "../RobotMap.h"
-
 #include <math.h>
 
 #include "../RobotMap.h"
@@ -13,27 +12,15 @@
 #define max(x, y) (((x) > (y)) ? (x) : (y))
 
 DriveTrain::DriveTrain() :
-		Subsystem("DriveTrain"), left(new TalonSRX(0)), right(new TalonSRX(1)), mult(1.0), ticksToDistance(114)  { // 112 < ticksToDistance < 117
+		Subsystem("DriveTrain"), left(new CANTalon(LEFT_MOTOR_PORT)), right(new CANTalon(RIGHT_MOTOR_PORT)), mult(1.0), ticksToDistance(114)  { // 112 < ticksToDistance < 117
 
-
-				//gyro(new wvrobotics::NewGyro(I2C::kOnboard, 0x6b)), axis(
-				//gyro->getAxis())
-				//accel(), //reverse(false),
-	//encoderLeft->SetDistancePerPulse(1.0);
-	//encoderRight->SetDistancePerPulse(1.0);
-	left->SetInverted(true);
-	right->SetInverted(true);
-	//gyro->Calibrate();
-	//gyro->Reset();
+	//left->SetInverted(true);
+	//right->SetInverted(true);
 }
 
 DriveTrain::~DriveTrain() {
 	delete left;
 	delete right;
-	//delete encoderLeft;
-	//delete encoderRight;
-	//delete accel;
-	//delete gyro;
 }
 
 void DriveTrain::reverseDrive(){
@@ -48,11 +35,6 @@ void DriveTrain::setMult(float m) {
 int DriveTrain::getMult() {
 	return mult;
 }
-
-//void DriveTrain::resetEncoders() {
-	//encoderLeft->Reset();
-	//encoderRight->Reset();
-//}
 
 void DriveTrain::arcadeDrive(float moveValue, float rotateValue) {
 	float leftMotorOutput;
@@ -116,60 +98,20 @@ float DriveTrain::Limit(float num, float max) {
 	return num;
 }
 
-// Return distance in feet
-//double DriveTrain::getDistance() {
-	// Average of both encoders (must negate to get proper direction)
-	//return ((double) ((encoderLeft->Get()) / ticksToDistance)
-			//- (double) ((encoderRight->Get()) / ticksToDistance)) / 2.0;
-//}
-
-//double DriveTrain::getRate() {
-	// Average of both encoder rates (must negate to get proper direction)
-	// TODO: test to see if negation is necessary
-	//return ((double) ((encoderLeft->GetRate()) / ticksToDistance)
-			//- (double) ((encoderRight->GetRate()) / ticksToDistance)) / 2.0;
-
-//}
-
-//void DriveTrain::getAccelerations(double* x, double* y, double* z) {
-	//*x = accel->GetX();
-	//*y = accel->GetY();
-	//*z = accel->GetZ();
-//}
+ //Return distance in feet
+double DriveTrain::getDistance() {
+	return 0;
+}
 
 void DriveTrain::InitDefaultCommand() {
 	//std::cout<<"pushpush"<<std::endl;
 	SetDefaultCommand(new TankDrive());
 }
 
-//double DriveTrain::getLeftEncoderDistance() {
-	//TODO negate this and the right one below
-	//return this->left->GetPosition();
-
-	//return -this->encoderLeft->GetDistance();
-//}
-
-//double DriveTrain::getRightEncoderDistance() {
-	//return this->encoderRight->GetDistance();
-//}
-
-double DriveTrain::getGyroAngle() {
-	//return axis->getzAxis();
-	return 0;
-}
-
-void DriveTrain::resetGyro() {
-	//gyro->resetGyro();
-}
-
-double DriveTrain::readUltra(uint16_t sensorIndex) {
-	return 0.0;	//ultrasonicSensors->ReadUltra(sensorIndex);
-}
-
 void DriveTrain::setSpeedLeft(double speed) {
-	left->SetSpeed(speed * mult);
+	left->Set(speed * mult);
 }
 
 void DriveTrain::setSpeedRight(double speed) {
-	right->SetSpeed(speed * mult);
+	right->Set(speed * mult);
 }
