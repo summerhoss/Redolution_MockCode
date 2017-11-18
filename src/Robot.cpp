@@ -33,6 +33,16 @@ public:
 
 	void DisabledPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
+
+		//This is copied from last year's code because we don't have the CV values yet
+		frc::SmartDashboard::PutBoolean("CVGearFound",
+					NetworkTablesInterface::gearFound());
+		frc::SmartDashboard::PutNumber("CVGearDistance",
+					NetworkTablesInterface::getGearDistance());
+		frc::SmartDashboard::PutNumber("CVGearAltitude",
+					NetworkTablesInterface::getGearAltitude());
+		frc::SmartDashboard::PutNumber("CVGearAzimuth",
+					NetworkTablesInterface::getGearAzimuth());
 	}
 
 	/**
@@ -65,10 +75,30 @@ public:
 	void TeleopPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
 
+		//This is copied from last year's code because we don't have the CV values yet
+		frc::SmartDashboard::PutBoolean("CVGearFound",
+					NetworkTablesInterface::gearFound());
+		frc::SmartDashboard::PutNumber("CVGearDistance",
+					NetworkTablesInterface::getGearDistance());
+		frc::SmartDashboard::PutNumber("CVGearAltitude",
+					NetworkTablesInterface::getGearAltitude());
+		frc::SmartDashboard::PutNumber("CVGearAzimuth",
+					NetworkTablesInterface::getGearAzimuth());
+
 	}
 
 	void TestPeriodic() override {
 		frc::LiveWindow::GetInstance()->Run();
+
+		//This is copied from last year's code because we don't have the CV values yet
+		frc::SmartDashboard::PutBoolean("CVGearFound",
+					NetworkTablesInterface::gearFound());
+		frc::SmartDashboard::PutNumber("CVGearDistance",
+					NetworkTablesInterface::getGearDistance());
+		frc::SmartDashboard::PutNumber("CVGearAltitude",
+					NetworkTablesInterface::getGearAltitude());
+		frc::SmartDashboard::PutNumber("CVGearAzimuth",
+					NetworkTablesInterface::getGearAzimuth());
 	}
 
 };
